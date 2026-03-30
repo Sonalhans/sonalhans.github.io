@@ -34,4 +34,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 (spans[2].style.transform = 'none');
         });
     }
+
+    // Active link highlighting on scroll
+    const sections = document.querySelectorAll('header[id], section[id]');
+    const navItems = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            // Add a 150px offset to trigger earlier smoothly
+            if (window.scrollY >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (current && item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
+        });
+    });
 });
