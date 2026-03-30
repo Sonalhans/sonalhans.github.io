@@ -381,7 +381,8 @@ body {
     margin-bottom: 0.75rem;
 }
 
-.skill-card p, .skill-card ul {
+.skill-card p,
+.skill-card ul {
     font-size: 0.95rem;
     color: var(--text-muted);
 }
