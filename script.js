@@ -41,13 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            // Add a 150px offset to trigger earlier smoothly
-            if (window.scrollY >= (sectionTop - 150)) {
-                current = section.getAttribute('id');
-            }
-        });
+        const scrollPos = window.scrollY;
+        const pageBottom = document.documentElement.scrollHeight - window.innerHeight;
+
+        // If at the bottom of the page, highlight the last section
+        if (scrollPos >= pageBottom - 10) {
+            current = sections[sections.length - 1].getAttribute('id');
+        } else {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollPos >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+        }
 
         navItems.forEach(item => {
             item.classList.remove('active');
